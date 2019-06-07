@@ -15,6 +15,9 @@
     <ClInclude Include="StreamCsv.h">
       <Filter>header</Filter>
     </ClInclude>
+    <ClInclude Include="picojson.h">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="cpp">

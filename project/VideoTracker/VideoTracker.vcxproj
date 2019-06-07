@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cmdline.h" />
+    <ClInclude Include="picojson.h" />
     <ClInclude Include="StreamCsv.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
