@@ -88,17 +88,17 @@ def AddSaliencyscores(gfilepath, filepathFG, filepathSR, filepathMS):
                 b = a//20.02002
                 image_fileFG = filepathFG +'FG_img_{}.png'.format(str(int(b)).zfill(6))
                 image_fileSR = filepathSR + 'SR_img_{}.png'.format(str(int(b)).zfill(6))
-                image_fileMS = filepathMo + 'Mo_img_{}.png'.format(str(int(b)).zfill(6))
+                image_fileMo = filepathMo + 'Mo_img_{}.png'.format(str(int(b)).zfill(6))
 
                 imgFG = cv2.imread(image_fileFG)
                 imgSR = cv2.imread(image_fileSR)
-                imgMS = cv2.imread(image_fileMS)
+                imgMo = cv2.imread(image_fileMo)
 
                 if not((df.loc[a, ('x')]=='NaN') or (df.loc[a, ('y')]=='NaN')):
                     if 0<=(int(df.loc[a, ('x')]))<=719 and 0<=(int(df.loc[a, ('y')]))<=479:
                         df.loc[a, ('FG_{}'.format(x))] = (imgFG[int(df.loc[a, ('y')]),int(df.loc[a, ('x')])])[0]/255
                         df.loc[a, ('SR_{}'.format(x))] = (imgSR[int(df.loc[a, ('y')]),int(df.loc[a, ('x')])])[0]/255
-                        df.loc[a, ('Mo_{}'.format(x))] = (imgMS[int(df.loc[a, ('y')]),int(df.loc[a, ('x')])])[0]/255
+                        df.loc[a, ('Mo_{}'.format(x))] = (imgMo[int(df.loc[a, ('y')]),int(df.loc[a, ('x')])])[0]/255
                     else:
                         df.loc[a, ('FG_{}'.format(x))] = 0
                         df.loc[a, ('SR_{}'.format(x))] = 0
@@ -125,7 +125,7 @@ ID = []
 distanceos_med = []
 FGos_med = []
 SRos_med = []
-MSos_med = []
+Moos_med = []
 
 for filepath in glob.glob(output_dir + '/output_csv/personal_data/m_video_Recording*.csv'):
     df = pd.read_csv(filepath, sep=',', index_col=0)
@@ -138,12 +138,12 @@ for filepath in glob.glob(output_dir + '/output_csv/personal_data/m_video_Record
     distanceos_med.append(df_gazedes.loc['50%', 'distance'])
     FGos_med.append(df_gazedes.loc['50%', 'FG_{}'.format(num)])
     SRos_med.append(df_gazedes.loc['50%', 'SR_{}'.format(num)])
-    MSos_med.append(df_gazedes.loc['50%', 'MS_{}'.format(num)])
+    Moos_med.append(df_gazedes.loc['50%', 'Mo_{}'.format(num)])
 
 df_scores　= pd.DataFrame({ 'ID' : ID,
                             'distanceos_median': distanceos_med,
                             'FGos_median': FGos_med,
                             'SRos_median': SRos_med,
-                            'MSos_median': MSos_med
+                            'Moos_median': MSos_med
                           })
 df_scores.to_csv(home + '/output_csv/output_scores.csv', index=False)
